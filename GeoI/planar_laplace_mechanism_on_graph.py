@@ -19,7 +19,7 @@ def per_bi(a_x,a_y,b_x,b_y):
 def laplace(x0,y0,epsilon):
     return lambda x,y : (epsilon**2/(2*math.pi))*np.exp(-epsilon*np.sqrt((x0-x)**2+(y0-y)**2))
 
-class PlanarLaplaceMechanismOnGraph:
+class PlanarLaplaceMechanismOnGraph(share.Mechanism):
     
     def __init__(self, map, epsilon, graph_type="ox", is_vis=False):
         self.is_vis = is_vis

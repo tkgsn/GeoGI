@@ -34,7 +34,7 @@ if __name__ == "__main__":
 
     prior = np.array([[1/len(map.ids)]*len(map.ids)]).T
 
-    results = {"plmg_sql":[], "plmg_ae":[], "optgeoi_sql":[], "optgeoi_ae":[], "gem_sql":[], "gem_ae":[], "optgem_sql":[], "optgem_ae":[]}
+    results = {"plmg_sql":[], "plmg_ae":[], "optgeoi_sql":[], "optgeoi_ae":[], "gem_sql":[], "gem_ae":[], "optgem_sql":[], "optgem_ae":[], "optgem_epsilon":[]}
 
     for i in range(n_iter):
 
@@ -51,6 +51,7 @@ if __name__ == "__main__":
         results["gem_ae"].append(evaluator.compute_ae(gem, map, prior))
         results["optgem_sql"].append(evaluator.compute_sql(optgem, map, prior))
         results["optgem_ae"].append(evaluator.compute_ae(optgem, map, prior))
+        results["optgem_epsilon"].append(optgem.compute_GeoGI_epsilon(map))
 
         map.resampling()
 

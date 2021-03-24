@@ -1,11 +1,9 @@
 import pulp
 import numpy as np
 import GeoI
+import share
 
-class Mechanism:
-    pass
-
-class OptMechanism(Mechanism):
+class OptMechanism(share.Mechanism):
 
     def __init__(self, map, epsilon, prior, delta):
         print("construct a spanner")

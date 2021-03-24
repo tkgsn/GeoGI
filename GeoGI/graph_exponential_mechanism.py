@@ -1,14 +1,8 @@
 import numpy as np
 import share
 
-class Mechanism():
 
-    def normalize(self, distribution):
-        sum_dist = np.sum(distribution, axis=1).reshape(-1,1)
-        m = distribution / sum_dist
-        return m
-
-class GraphExponentialMechanism(Mechanism):
+class GraphExponentialMechanism(share.Mechanism):
 
     def __init__(self, map, epsilon):
         self.distribution = self.construct_distribution(map, epsilon)
