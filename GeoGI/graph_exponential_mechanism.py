@@ -33,6 +33,8 @@ class OptimalGraphExponentialMechanism(GraphExponentialMechanism):
 
             for id in map.ids:
 
+                print(f"{id}/{len(map.ids)}", end="\r")
+
                 if id in removed_nodes:
                     remove_flg = True
                     removed_nodes.remove(id)

@@ -35,8 +35,8 @@ class RoadNetworkMap(Map):
         self._initialize(self.graph.nodes)
 
     @classmethod
-    def make_map(cls, location_name, lat, lon, distance):
-        G = ox.graph_from_point((lat, lon), network_type="walk", dist_type="bbox", dist=distance, simplify=False)
+    def make_map(cls, location_name, lat, lon, distance,  simplify=False):
+        G = ox.graph_from_point((lat, lon), network_type="walk", dist_type="bbox", dist=distance, simplify=simplify)
 
         orig_shortest_path_distances = dict(nx.all_pairs_dijkstra_path_length(G, weight='length'))
         shortest_path_distances = {str(node):{} for node in G.nodes}
@@ -84,3 +84,7 @@ class RoadNetworkMap(Map):
 
     def _choose_shortest_path_distance(self, shortest_path_distances, nodes):
         return {self.node_to_id[node]:[shortest_path_distances[node][node_in]*1e-3 for node_in in nodes] for node in nodes}
+
+    def plot(self):
+        fig, _ = ox.plot_graph(self.graph,show=False,close=False,node_color="black")
+        fig.show()

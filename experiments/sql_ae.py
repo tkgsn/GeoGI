@@ -13,7 +13,7 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("--n_iter", default=10, type=int)
 parser.add_argument("--seed", default=0, type=int)
-parser.add_argument("--delta", default=1.2, type=float)
+parser.add_argument("--delta", default=2, type=float)
 parser.add_argument("--epsilon", default=1, type=float)
 parser.add_argument("--n_chosen", default=50, type=int)
 parser.add_argument("--location", default="Akita", type=str)
