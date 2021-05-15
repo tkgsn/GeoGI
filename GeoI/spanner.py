@@ -4,7 +4,7 @@ import functools
 
 class Spanner:
 
-    def __init__(self, map, delta):
+    def __init__(self, map, delta=1.3):
         self.delta = delta
         self.graph = self.construct_spanner(map, delta)
 
@@ -21,7 +21,7 @@ class Spanner:
             return (int(index/n_nodes), index%n_nodes)
 
         for i, index in enumerate(sorted_joined_euclidean_distances):
-            print(f"{i}/{n_nodes*n_nodes}", end="\r")
+            #print(f"{i}/{n_nodes*n_nodes}", end="\r")
 
             comb = index_to_comb(index)
             if nx.has_path(spanner, comb[0], comb[1]):

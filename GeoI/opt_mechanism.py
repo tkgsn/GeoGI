@@ -2,12 +2,13 @@ import pulp
 import numpy as np
 import GeoI
 import share
+import itertools
 
 class OptMechanism(share.Mechanism):
 
     def __init__(self, map, epsilon, prior, delta):
         print("construct a spanner")
-        spanner = GeoI.Spanner(map, delta)
+        spanner = GeoI.Spanner(map)
         print("solving the linear problem")
         self.distribution = self.construct_distribution(map, epsilon, spanner, prior)
 
@@ -27,11 +28,12 @@ class OptMechanism(share.Mechanism):
                 problem += variable >= 0
 
         for edge in spanner.graph.edges:
+        #for edge in itertools.combinations(map.ids, 2):
             for id in map.ids:
                 problem += variables[edge[0]][id] <= np.exp(epsilon * map.euclidean_distances[edge[0]][edge[1]] / delta) * variables[edge[1]][id]
                 problem += variables[edge[1]][id] <= np.exp(epsilon * map.euclidean_distances[edge[0]][edge[1]] / delta) * variables[edge[0]][id]
-
-        status = problem.solve(pulp.PULP_CBC_CMD(msg=1))
+                
+        status = problem.solve(pulp.PULP_CBC_CMD(msg=0))
         f = np.frompyfunc(lambda x:x.value(), 1, 1)
 
-        return f(variables)
+        return f(variables).astype(np.float64)
